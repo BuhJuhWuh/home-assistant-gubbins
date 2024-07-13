@@ -1,0 +1,321 @@
+type: custom:apexcharts-card
+apex_config:
+  chart:
+    height: 350px
+  legend:
+    show: false
+all_series_config:
+  unit: ' kWh'
+header:
+  title: Solar forecast
+  show: true
+  standard_format: true
+  show_states: true
+  colorize_states: true
+graph_span: 4d
+span:
+  start: day
+  offset: '-0h'
+now:
+  show: true
+yaxis:
+  - id: kwh
+    min: 0
+    max: 6
+    align_to: 1
+    apex_config:
+      tickAmount: 6
+  - id: header_only
+    show: false
+series:
+  - entity: sensor.solcast_pv_forecast_forecast_today
+    yaxis_id: kwh
+    type: area
+    name: Today 90
+    color: orange
+    opacity: 0.33
+    data_generator: |
+      var today = entity.attributes.detailedForecast.map((start, index) => {
+        return [new Date(start["period_start"]).getTime(), entity.attributes.detailedForecast[index]["pv_estimate90"]];
+      });
+      var data = today
+      return data;
+    show:
+      legend_value: false
+      in_header: false
+    stroke_width: 0
+    float_precision: 2
+    extend_to: false
+  - entity: sensor.solcast_pv_forecast_forecast_today
+    yaxis_id: kwh
+    type: area
+    name: Today
+    color: orange
+    opacity: 0.33
+    data_generator: |
+      var today = entity.attributes.detailedForecast.map((start, index) => {
+        return [new Date(start["period_start"]).getTime(), entity.attributes.detailedForecast[index]["pv_estimate"]];
+      });
+      var data = today
+      return data;
+    show:
+      legend_value: false
+      in_header: false
+    stroke_width: 2
+    float_precision: 2
+    extend_to: false
+  - entity: sensor.solcast_pv_forecast_forecast_today
+    yaxis_id: kwh
+    type: area
+    name: Today 10
+    color: orange
+    opacity: 0.33
+    data_generator: |
+      var today = entity.attributes.detailedForecast.map((start, index) => {
+        return [new Date(start["period_start"]).getTime(), entity.attributes.detailedForecast[index]["pv_estimate10"]];
+      });
+      var data = today
+      return data;
+    show:
+      legend_value: false
+      in_header: false
+    stroke_width: 0
+    float_precision: 2
+    extend_to: false
+  - entity: sensor.solcast_pv_forecast_forecast_tomorrow
+    yaxis_id: kwh
+    type: area
+    name: Tomorrow90
+    color: grey
+    opacity: 0.33
+    data_generator: |
+      var today = entity.attributes.detailedForecast.map((start, index) => {
+        return [new Date(start["period_start"]).getTime(), entity.attributes.detailedForecast[index]["pv_estimate90"]];
+      });
+      var data = today
+      return data;
+    show:
+      legend_value: false
+      in_header: false
+    stroke_width: 0
+    float_precision: 2
+    extend_to: false
+  - entity: sensor.solcast_pv_forecast_forecast_tomorrow
+    yaxis_id: kwh
+    type: area
+    name: Tomorrow
+    color: grey
+    opacity: 0.33
+    data_generator: |
+      var today = entity.attributes.detailedForecast.map((start, index) => {
+        return [new Date(start["period_start"]).getTime(), entity.attributes.detailedForecast[index]["pv_estimate"]];
+      });
+      var data = today
+      return data;
+    show:
+      legend_value: false
+      in_header: false
+    stroke_width: 2
+    float_precision: 2
+    extend_to: false
+  - entity: sensor.solcast_pv_forecast_forecast_tomorrow
+    yaxis_id: kwh
+    type: area
+    name: Tomorrow10
+    color: grey
+    opacity: 0.33
+    data_generator: |
+      var today = entity.attributes.detailedForecast.map((start, index) => {
+        return [new Date(start["period_start"]).getTime(), entity.attributes.detailedForecast[index]["pv_estimate10"]];
+      });
+      var data = today
+      return data;
+    show:
+      legend_value: false
+      in_header: false
+    stroke_width: 0
+    float_precision: 2
+    extend_to: false
+  - entity: sensor.solcast_pv_forecast_forecast_day_3
+    yaxis_id: kwh
+    type: area
+    name: Day 3 90
+    color: darkgrey
+    opacity: 0.33
+    data_generator: |
+      var today = entity.attributes.detailedForecast.map((start, index) => {
+        return [new Date(start["period_start"]).getTime(), entity.attributes.detailedForecast[index]["pv_estimate90"]];
+      });
+      var data = today
+      return data;
+    show:
+      legend_value: false
+      in_header: false
+    stroke_width: 0
+    float_precision: 2
+    extend_to: false
+  - entity: sensor.solcast_pv_forecast_forecast_day_3
+    yaxis_id: kwh
+    type: area
+    name: Day 3
+    color: darkgrey
+    opacity: 0.33
+    data_generator: |
+      var today = entity.attributes.detailedForecast.map((start, index) => {
+        return [new Date(start["period_start"]).getTime(), entity.attributes.detailedForecast[index]["pv_estimate"]];
+      });
+      var data = today
+      return data;
+    show:
+      legend_value: false
+      in_header: false
+    stroke_width: 2
+    float_precision: 2
+    extend_to: false
+  - entity: sensor.solcast_pv_forecast_forecast_day_3
+    yaxis_id: kwh
+    type: area
+    name: Day 3 10
+    color: darkgrey
+    opacity: 0.33
+    data_generator: |
+      var today = entity.attributes.detailedForecast.map((start, index) => {
+        return [new Date(start["period_start"]).getTime(), entity.attributes.detailedForecast[index]["pv_estimate10"]];
+      });
+      var data = today
+      return data;
+    show:
+      legend_value: false
+      in_header: false
+    stroke_width: 0
+    float_precision: 2
+    extend_to: false
+  - entity: sensor.solcast_pv_forecast_forecast_day_4
+    yaxis_id: kwh
+    type: area
+    name: Day 4 90
+    color: lightgrey
+    opacity: 0.33
+    data_generator: |
+      var today = entity.attributes.detailedForecast.map((start, index) => {
+        return [new Date(start["period_start"]).getTime(), entity.attributes.detailedForecast[index]["pv_estimate90"]];
+      });
+      var data = today
+      return data;
+    show:
+      legend_value: false
+      in_header: false
+    stroke_width: 0
+    float_precision: 2
+    extend_to: false
+  - entity: sensor.solcast_pv_forecast_forecast_day_4
+    yaxis_id: kwh
+    type: area
+    name: Day 4
+    color: lightgrey
+    opacity: 0.33
+    data_generator: |
+      var today = entity.attributes.detailedForecast.map((start, index) => {
+        return [new Date(start["period_start"]).getTime(), entity.attributes.detailedForecast[index]["pv_estimate"]];
+      });
+      var data = today
+      return data;
+    show:
+      legend_value: false
+      in_header: false
+    stroke_width: 2
+    float_precision: 2
+    extend_to: false
+  - entity: sensor.solcast_pv_forecast_forecast_day_4
+    yaxis_id: kwh
+    type: area
+    name: Day 4 10
+    color: lightgrey
+    opacity: 0.33
+    data_generator: |
+      var today = entity.attributes.detailedForecast.map((start, index) => {
+        return [new Date(start["period_start"]).getTime(), entity.attributes.detailedForecast[index]["pv_estimate10"]];
+      });
+      var data = today
+      return data;
+    show:
+      legend_value: false
+      in_header: false
+    stroke_width: 0
+    float_precision: 2
+    extend_to: false
+  - entity: sensor.givtcp_fd2249g956_pv_power
+    yaxis_id: kwh
+    type: area
+    name: Generated
+    color: tomato
+    opacity: 0.33
+    show:
+      legend_value: false
+      in_header: false
+    stroke_width: 2
+    float_precision: 2
+    extend_to: false
+    group_by:
+      func: avg
+      duration: 30m
+    transform: return x/1000
+  - entity: sensor.solcast_pv_forecast_forecast_today
+    yaxis_id: header_only
+    name: Today
+    color: orange
+    show:
+      legend_value: true
+      in_header: true
+      in_chart: false
+  - entity: sensor.solcast_pv_forecast_forecast_tomorrow
+    yaxis_id: header_only
+    name: Tomorrow
+    color: grey
+    show:
+      legend_value: true
+      in_header: true
+      in_chart: false
+  - entity: sensor.solcast_pv_forecast_forecast_day_3
+    yaxis_id: header_only
+    name: Day 3
+    color: darkgrey
+    show:
+      legend_value: true
+      in_header: true
+      in_chart: false
+  - entity: sensor.solcast_pv_forecast_forecast_day_4
+    yaxis_id: header_only
+    name: Day 4
+    color: lightgrey
+    show:
+      legend_value: true
+      in_header: true
+      in_chart: false
+  - entity: sensor.solcast_pv_forecast_forecast_remaining_today
+    yaxis_id: header_only
+    name: Remaining
+    color: orange
+    show:
+      legend_value: true
+      in_header: true
+      in_chart: false
+  - entity: sensor.givtcp_fd2249g956_pv_energy_today_kwh
+    yaxis_id: header_only
+    name: Generated today
+    color: tomato
+    unit: kWh
+    show:
+      legend_value: true
+      in_header: true
+      in_chart: false
+  - entity: sensor.solcast_pv_forecast_api_last_polled
+    yaxis_id: header_only
+    name: Last update
+    unit: ' hr.'
+    transform: return ((Date.now()) - (new Date(x).getTime())) /60 / 60 / 24 / 60
+    show:
+      legend_value: true
+      in_header: true
+      in_chart: false
+      
