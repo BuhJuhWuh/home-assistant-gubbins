@@ -10,7 +10,7 @@ pretty_solcast_apexchart.yaml is code for a Home Assistant [Apexcharts](https://
 
 To use, just paste into a new Apexcharts card. For the actual generation trace you'll need to replace the xxxxxxxxxx with your own inverter's serial number in the givtcp entities (2 places, towards the end of the file).
 
-## Heat Pump Consumption Forecast
+## Predbat Heat Pump Consumption Forecast
 
 Uses the 24hr forecast temperatures from the [Met.no integration](https://www.home-assistant.io/integrations/met) to calculate predicted heat pump usage, formatting the result in a form suitable for input to [Predbat's Load Forecast input](https://springfall2008.github.io/batpred/apps-yaml/#load-forecast).  See also some discussion [here](https://github.com/springfall2008/batpred/discussions/837).
 
