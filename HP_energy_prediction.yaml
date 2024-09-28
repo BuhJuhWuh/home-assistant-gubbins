@@ -1,0 +1,41 @@
+template:
+  - trigger:
+      - platform: time_pattern
+        hours: /1
+        #minutes: /1
+    action:
+      - service: weather.get_forecasts
+        data:
+          type: hourly
+        target:
+          entity_id: weather.forecast_home
+        response_variable: hourly_forecast_data
+      - variables:
+          forecasts: "{{ hourly_forecast_data['weather.forecast_home'].forecast }}"
+    sensor:      
+      - name: "HP Energy Prediction"
+        unique_id: HP_energy_prediction
+        state: "{{ now().isoformat() }}"
+        attributes:
+          HP_Prediction: |            
+            {# Choose coefficients for quadratic curve fit - specific to your house/heating demand #}
+            {% set a = 0.1093 %}
+            {% set b = -3.8824 %}
+            {% set c = 38.184 %}
+            {% set ns = namespace(hourly_energy_list=[]) %}
+            {% set ns.incr_energy_list = [] %}
+            {% for f in forecasts %}  
+              {# For each hourly entry, get temperature value from 'forecasts' variable and store it in 't' #}
+              {% set t = f.temperature | float %}
+              {# Calculate hourly energy HP prediction based on temperature and known fit curve #}
+              {% set hourly_energy = ((a*(t**2) + b*t + c)/24)|round(2) %}
+              {# Add to list of hourly energy values #}
+              {% set ns.hourly_energy_list = ns.hourly_energy_list + [hourly_energy] %}
+              {# Calculate sum of hourly entries so far #}
+              {% set incr_energy = ns.hourly_energy_list|sum %}
+              {# Create dictionary entry #}
+              {% set incr_entry = {"last_updated" : f.datetime, "energy" : incr_energy} %}
+              {# Add to list of dictionary entries #}
+              {% set ns.incr_energy_list = ns.incr_energy_list + [incr_entry] %}
+            {% endfor %}
+            {{ ns.incr_energy_list }}
