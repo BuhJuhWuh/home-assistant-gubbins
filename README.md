@@ -26,6 +26,8 @@ Fit a trendline.  Quadratic was the best-looking fit for me.  Show the equation,
 
 Grab the template from [HP_energy_prediction.yaml](https://github.com/BuhJuhWuh/home-assistant-gubbins/blob/main/HP_energy_prediction.yaml).  Substitute in your coefficients a, b and c in lines 22-24.
 
+Paste the template with your coefficients into your Home Assistant's configuration.yaml.
+
 Find the relevant section in Predbat's apps.yaml, and point it towards your new template:
 
 ```
